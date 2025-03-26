@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Peta Pulau Sumatera</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .sidebar {
+      width: 250px;
+      background: #343a40;
+      color: #fff;
+      padding: 20px;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 8px 0;
+    }
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+    #map {
+      width: 100%;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Dashboard</h2>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a href="#" class="nav-link active">Beranda</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Manage Vendor</a></li>
+    </ul>
+  </div>
+
+  <!-- Konten Utama -->
+  <div class="content">
+    <h1>Peta Pulau Sumatera</h1>
+    <div id="map"></div>
+  </div>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    /*
+    // Cek apakah pengguna sudah login dengan memeriksa 'isLoggedIn' di localStorage
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      // Jika belum login, arahkan ke halaman login
+      window.location.href = 'Login.html';
+    }
+    */
+
+
+    // Inisialisasi peta dengan koordinat tengah Pulau Sumatera dan zoom level 5
+    var map = L.map('map').setView([0, 102], 5);
+
+    // Tambahkan tile layer dari OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Membuat ikon kustom untuk marker (contoh untuk Medan)
+    var customIcon = L.icon({
+      iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-red.png',
+      shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+      iconSize: [38, 95],
+      shadowSize: [50, 64],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
+    });
+
+    // Tambahkan marker dengan custom icon pada Kota Medan
+    var markerMDNABS01= L.marker([3.576552, 98.659729]).addTo(map);
+    markerMDNABS01.bindPopup("<b>MDNABS01 (Core)</b><ul><li>Telkom Akses</li><li>Indosat</li><li>Kopkarla</li></ul>");
+
+    var markerMDNAST01= L.marker([3.544444, 98.721633]).addTo(map);
+    markerMDNAST01.bindPopup("<b>MDNAST01 (Access)</b><ul><li>Telkom Akses</li><li>Indosat</li><li>Kopkarla</li></ul>");
+
+    var markerMDNBEL01    = L.marker([3.780685, 98.692304]).addTo(map);
+    markerMDNBEL01.bindPopup("<b>MDNBEL01 (Access)</b><ul><li>Telkom Akses</li><li>Indosat</li><li>Kopkarla</li></ul>");
+    // Tambahkan marker default pada Kota Padang dengan keterangan tambahan
+    var markerPadang = L.marker([-0.9471, 100.4172]).addTo(map);
+    markerPadang.bindPopup(`
+      <b>Kota Padang</b>
+      <ul>
+        <li>Telkom Akses</li>
+        <li>Velo Cloud</li>
+        <li>Lintasarta</li>
+      </ul>
+    `);
+
+    // Sesuaikan tampilan peta agar kedua marker terlihat
+    map.fitBounds(polyline.getBounds());
+  </script>
+</body>
+</html>
