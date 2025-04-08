@@ -251,16 +251,6 @@ markerSDKSIM01.bindPopup("<b>SDKSIM01 (ACCESS)</b><ul><li>Telkom Akses</li><li>I
 
 var markerLBPSDU01 = L.marker([3.627287, 98.84431]).addTo(map);
 markerLBPSDU01.bindPopup("<b>LBPSDU01 (ACCESS)</b><ul><li>Telkom Akses</li><li>Indosat</li><li>Kopkarla</li></ul>");
-    var markerPadang = L.marker([-0.9471, 100.4172]).addTo(map);
-    markerPadang.bindPopup(`
-      <b>Kota Padang</b>
-      <ul>
-        <li>Telkom Akses</li>
-        <li>Velo Cloud</li>
-        <li>Lintasarta</li>
-      </ul>
-    `);
-
     // Sesuaikan tampilan peta agar kedua marker terlihat
     map.fitBounds(polyline.getBounds());
   </script>
